@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Pizza House</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {%load static%}
+  {% include "partials/css.html" %}
+</head>
+
+<body>
+  <!-- Start nav -->
+  {% include "partials/navbar.html" %}
+  <!-- END nav -->
+
+
+
+
+
+  <!-- Start dashboard -->
+  <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_1.jpg'%});">
+    <!-- dash div -->
+    {%for item  in items%}
+    {% if forloop.counter <= 3 %}
+    <div class="slider-item">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row slider-text align-items-center" data-scrollax-parent="true">
+          <div class="col-md-6 col-sm-12 ftco-animate">
+            <span class="subheading">{{item.name}}</span>
+
+            <h1 class="mb-4">{{item.name}}</h1>
+            <p class="mb-4 mb-md-5">{{item.description}}</p>
+            <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="menu" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+          </div>
+          <div class="col-md-6 ftco-animate">
+            <img src="{% static item.image %}" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+    <!-- Dash div -->
+  </section>
+  <!-- End dashboard -->
+
+
+
+  <!--Start Contacts -->
+	{% include "partials/welcome.html" %}
+
+  <!-- End Contacts -->
+  <!-- Start Our Services 3 -->
+  {% include "partials/css.html" %}
+  <!-- End services -->
+
+
+
+
+  
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate text-center">
+          <h2 class="mb-4">Hot Pizza Meals</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Start hot pizza meals -->
+
+    <div class="container-wrap">
+      <div class="row no-gutters d-flex">
+        <!-- pizza div -->
+        {% for item in items  %}
+        {% if item.cat == 'pizza'%}
+        <div class="col-lg-4 d-flex ftco-animate">
+          <div class="services-wrap d-flex">
+            <a href="#" class="img" style="background-image: url({% static item.image %});"></a>
+            <div class="text p-4">
+              <h3>{{item.name}}</h3>
+              <p>{{item.description}}</p>
+              <p class="price"><span>${{item.price}}</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
+            </div>
+          </div>
+        </div>
+        {%endif%}
+        {% endfor %}
+        <!-- pizza div -->
+      </div>
+    </div>
+    <!-- End hot pizza meals -->
+
+    <!-- start menu -->
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
+        <div class="col-md-7 heading-section text-center ftco-animate">
+          <h2 class="mb-4">Our Menu Pricing</h2>
+          <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
+          <p class="mt-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+        </div>
+      </div>
+      <div class="row">
+        <!--  -->
+        {% for item in items %}
+        <div class="col-md-6">
+          <div class="pricing-entry d-flex ftco-animate">
+            <div class="img" style="background-image: url(images/pizza-6.jpg);"></div>
+            <div class="desc pl-3">
+              <div class="d-flex text align-items-center">
+                <h3><span>{{item.name}}</span></h3>
+                <span class="price">${{item.price}}</span>
+              </div>
+              <div class="d-block">
+                <p>{{item.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+        <!--  -->
+      </div>
+  </section>
+  <!-- End menu -->
+  {% include "partials/stats.html" %}
+  <!--Start  cat for category -->
+  <section class="ftco-menu">
+    <div class="container-fluid">
+      <div class="row d-md-flex">
+        <div class="col-lg-4 ftco-animate img f-menu-img mb-5 mb-md-0" style="background-image: url({% static 'images/about.jpg'%}	);">
+        </div>
+        <div class="col-lg-8 ftco-animate p-md-5">
+          <div class="row">
+            <div class="col-md-12 nav-link-wrap mb-5">
+              <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Pizza</a>
+
+                <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Drinks</a>
+
+                <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Burgers</a>
+
+                <a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">Pasta</a>
+              </div>
+            </div>
+            <div class="col-md-12 d-flex align-items-center">
+              <div class="tab-content ftco-animate" id="v-pills-tabContent">
+                <!--Start pizza cat -->
+                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                  <div class="row">
+                    <!-- pizza div -->
+                    {% for item in items  %}
+                    {% if item.cat == 'pizza' and item.onOffer %}
+                    <div class="col-md-4 text-center">
+                      <div class="menu-wrap">
+                        <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
+                        <div class="text">
+                          <h3><a href="#">{{item.name}}</a></h3>
+                          <p>{{item.description}}</p>
+                          <p class="price"><span>${{item.price}}</span></p>
+                          <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                    <!-- pizza div -->
+
+                  </div>
+                </div>
+                <!--End pizza cat -->
+
+                <!--Start drinnks cat -->
+
+                <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                  <div class="row">
+                    <!-- drinks div -->
+                    {% for item in items %}
+                    {% if item.cat == 'drink'  and item.onOffer%}
+                    <div class="col-md-4 text-center">
+                      <div class="menu-wrap">
+                        <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
+                        <div class="text">
+                          <h3><a href="#">{{item.onOffer}}</a></h3>
+                          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                          <p class="price"><span>${{item.price}}"</span></p>
+                          <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                    <!-- drinks div -->
+                  </div>
+                </div>
+                <!-- End drinnks cat -->
+
+                <!--Start burgers cat -->
+                <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                  <div class="row">
+                    <!-- burger div -->
+                    {% for item in items %}
+                    {% if item.cat == 'burger' and item.onOffer %}
+                    <div class="col-md-4 text-center">
+                      <div class="menu-wrap">
+                        <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
+                        <div class="text">
+                          <h3><a href="#">{{item.name}}</a></h3>
+                          <p>{{item.description}}</p>
+                          <p class="price"><span>${{item.price}}</span></p>
+                          <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                    <!-- burger div -->
+                  </div>
+                </div>
+                <!-- End burgers cat -->
+
+                <!-- Start pasta cat -->
+                <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                  <div class="row">
+                    <!-- pasta div -->
+                    {% for item in items %}
+                    {% if item.cat == 'pasta' and item.onOffer %}
+                    <div class="col-md-4 text-center">
+                      <div class="menu-wrap">
+                        <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
+                        <div class="text">
+                          <h3><a href="#">{{item.name}}</a></h3>
+                          <p>{{item.description}}</p>
+                          <p class="price"><span>${{item.price}}</span></p>
+                          <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                    <!-- pasta div -->
+                  </div>
+                </div>
+                <!--End  pasta cat -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--End  cat for category -->
+
+
+
+
+
+  <!-- Statr blog -->
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate text-center">
+          <h2 class="mb-4">Recent from blog</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+        </div>
+      </div>
+      <div class="row d-flex">
+        <!-- blog divv -->
+        {%for blog in blogs%}
+        {% if forloop.counter <= 3 %}
+        <div class="col-md-4 d-flex ftco-animate">
+          <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url( {% static blog.main_image %});">
+            </a>
+            <div class="text py-4 d-block">
+              <div class="meta">
+                <div><a href="#">{{blog.date}}</a></div>
+                <div><a href="#">{{blog.author}}</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+              </div>
+              <h3 class="heading mt-2"><a href="#">{{blog.title}}</a></h3>
+              <p>{{blog.subtitle}}</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {%endfor%}
+        <!-- blog divv -->
+      </div>
+    </div>
+  </section>
+  <!--End  blog -->
+
+
+
+
+
+  <!-- Start maps -->
+  {% include "partials/maps.html" %}
+  <!-- End maps -->
+  <!-- start footer -->
+  {% include "partials/footer.html" %}
+  <!-- End footer -->
+
+
+  <!-- Start loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+    </svg></div>
+    <!-- end loader -->
+  {% include "partials/css.html" %}
+</body>
+
+</html>

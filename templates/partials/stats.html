@@ -1,0 +1,35 @@
+
+
+
+
+
+
+  <!--Start stats -->
+  <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url(images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="row">
+            <!-- stats div -->
+            {% for icon in flaticons%}
+            {% if icon.type == 'stat' %}
+
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
+              <div class="block-18 text-center">
+                <div class="text">
+                  <div class="icon"><span class={{icon.icon}}></span></div>
+                  <strong class="number" data-number={{icon.title}}>0</strong>
+                  <span>{{icon.description}}</span>
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+            <!-- stats div -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--End stats -->
