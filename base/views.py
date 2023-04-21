@@ -11,14 +11,21 @@ def home(request):
         "blogs":blogs,
         "flaticons":flaticon, 
         }
-
     return render(request, "index.html", context)
-
 def menu(request):
-    return render(request, "menu.html")
+    flaticon = Flaticon.objects.all()
 
+    menu_items = Item.objects.all()
+    context = {
+        "items":menu_items,
+        "flaticons":flaticon
+        }
+    return render(request, "menu.html", context)
 def services(request):
-    return render(request, "services.html")
+    flaticon = Flaticon.objects.all()
+    menu_items = Item.objects.all()
+    context = {"flaticons":flaticon, "items":menu_items}
+    return render(request, "services.html", context)
 def blog(request):
     return render(request, "blog.html")
 def about(request):
