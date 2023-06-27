@@ -3,7 +3,7 @@ use pizzahouse;
 CREATE TABLE services (
     id INT PRIMARY KEY AUTO_INCREMENT,
     image VARCHAR(255),
-    title VARCHAR(255),
+    title VARCHAR(254),
     subtitle VARCHAR(255),
     serviceId INT
 );

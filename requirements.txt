@@ -1,2 +1,2 @@
-django 
-mysqlclient
+django and
+mysqlclient.
