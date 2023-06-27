@@ -26,7 +26,7 @@
                 <div class="row">
                   <!-- pizza div -->
                   {% for item in items  %}
-                  {% if item.cat == 'pizza' and item.onOffer %}
+                  {% if item.category == 'pizza' and item.onOffer %}
                   <div class="col-md-4 text-center">
                     <div class="menu-wrap">
                       <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
@@ -34,7 +34,7 @@
                         <h3><a href="#">{{item.name}}</a></h3>
                         <p>{{item.description}}</p>
                         <p class="price"><span>${{item.price}}</span></p>
-                        <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        <p><a href="order" class="btn btn-white btn-outline-white">Add to cart</a></p>
                       </div>
                     </div>
                   </div>
@@ -52,15 +52,15 @@
                 <div class="row">
                   <!-- drinks div -->
                   {% for item in items %}
-                  {% if item.cat == 'drink'  and item.onOffer%}
+                  {% if item.category == 'drink'  and item.onOffer%}
                   <div class="col-md-4 text-center">
                     <div class="menu-wrap">
                       <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
                       <div class="text">
                         <h3><a href="#">{{item.onOffer}}</a></h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                        <p>{{item.description}}</p>
                         <p class="price"><span>${{item.price}}"</span></p>
-                        <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        <p><a href="order" class="btn btn-white btn-outline-white">Add to cart</a></p>
                       </div>
                     </div>
                   </div>
@@ -76,7 +76,7 @@
                 <div class="row">
                   <!-- burger div -->
                   {% for item in items %}
-                  {% if item.cat == 'burger' and item.onOffer %}
+                  {% if item.category == 'burger' and item.onOffer %}
                   <div class="col-md-4 text-center">
                     <div class="menu-wrap">
                       <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
@@ -84,7 +84,7 @@
                         <h3><a href="#">{{item.name}}</a></h3>
                         <p>{{item.description}}</p>
                         <p class="price"><span>${{item.price}}</span></p>
-                        <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        <p><a href="order" class="btn btn-white btn-outline-white">Add to cart</a></p>
                       </div>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                 <div class="row">
                   <!-- pasta div -->
                   {% for item in items %}
-                  {% if item.cat == 'pasta' and item.onOffer %}
+                  {% if item.category == 'pasta' and item.onOffer %}
                   <div class="col-md-4 text-center">
                     <div class="menu-wrap">
                       <a href="#" class="menu-img img mb-4" style="background-image: url('{% static item.image %}');"></a>
@@ -108,7 +108,7 @@
                         <h3><a href="#">{{item.name}}</a></h3>
                         <p>{{item.description}}</p>
                         <p class="price"><span>${{item.price}}</span></p>
-                        <p><a href="#" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                        <p><a href="order" class="btn btn-white btn-outline-white">Add to cart</a></p>
                       </div>
                     </div>
                   </div>
