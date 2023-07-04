@@ -16,10 +16,8 @@
 
 
 
-
-
   <!-- Start dashboard -->
-  <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_1.jpg'%});">
+  <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_3.jpg'%});">
     <!-- dash div -->
     {%for item  in items%}
     {% if forloop.counter <= 3 %}
@@ -78,7 +76,7 @@
         {% if item.cat == 'pizza'%}
         <div class="col-lg-4 d-flex ftco-animate">
           <div class="services-wrap d-flex">
-            <a href="#" class="img" style="background-image: url({% static item.image %});"></a>
+            <img src="{% static item.image %}" alt="image">
             <div class="text p-4">
               <h3>{{item.name}}</h3>
               <p>{{item.description}}</p>

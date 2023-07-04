@@ -13,7 +13,7 @@
 		{% include "partials/navbar.html" %}
 	<!-- END nav -->
 
-    <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_1.jpg' %});">
+    <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_3.jpg' %});">
 
       <div class="slider-item" style="background-image: url(images/bg_3.jpg);">
       	<div class="overlay"></div>
@@ -46,20 +46,20 @@
           </div>
         </div>
         <div class="row">
-			{%for chef in chefs%}
-        	<div class="col-lg-3 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-      				<div class="img mb-4" style="background-image: url( {% static chef.image %});"></div>
-      				<div class="info text-center">
-      					<h3><a href="teacher-single.html">{{chef.name}}</a></h3>
-      					<span class="position">{{chef.position}}</span>
-      					<div class="text">
-	        				<p>{{chef.description}}</p>
-	        			</div>
-      				</div>
-        		</div>
-        	</div>
-        	{%endfor%}
+			      {%for chef in chefs%}
+              <div class="col-lg-3 d-flex mb-sm-4 ftco-animate">
+                <div class="staff">
+                  <div class="img mb-4" style="background-image: url( {% static chef.image %});"></div>
+                  <div class="info text-center">
+                    <h3><a href="teacher-single.html">{{chef.name}}</a></h3>
+                    <span class="position">{{chef.position}}</span>
+                    <div class="text">
+                      <p>{{chef.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        	  {%endfor%}
         </div>
       </div>
     </section>

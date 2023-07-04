@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 class Blog(models.Model):
     main_image = models.ImageField(upload_to='static/images')
-    other_images = models.ImageField(upload_to='static/images')
     date = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255)

@@ -24,7 +24,7 @@
 
 
 <!-- Our menu Start  -->
-  <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_1.jpg' %});">
+<section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_3.jpg' %})">
     <div class="slider-item" style="background-image: url(images/bg_3.jpg);">
       <div class="overlay"></div>
       <div class="container">
@@ -55,7 +55,7 @@
             <div class="text p-4">
               <h3>{{item.name}}</h3>
               <p>{{item.description}}</p>
-              <p class="price"><span>${{item.price}}</span> <a href="cart" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
+              <p class="price"><span>${{item.price}}</span> <a href="{% url 'cart' %}" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
             <div class="desc pl-3">
               <div class="d-flex text align-items-center">
                 <h3><span>{{item.name}}</span></h3>
-                <p class="price"><span>${{item.price}}</span> <a href="cart" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
+                <p class="price"><span>${{item.price}}</span> <a href="{% url 'cart' %}" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
               </div>
               <div class="d-block">
                 <p>{{item.description}}</p>
