@@ -30,5 +30,13 @@ CREATE TABLE item (
     cat VARCHAR(255)
 );
 
+CREATE TABLE CHEF(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    image VARCHAR(255),
+    name VARCHAR(255),
+    position VARCHAR(255),
+    description TEXT
+);
+
 INSERT INTO blogs (main_image, other_images, date_, title, subtitle, body, blogId, author) VALUES ('https://example.com/main_image.jpg', 'https://example.com/other_image_1.jpg,https://example.com/other_image_2.jpg', '2022-04-16', 'My Blog Post', 'A Brief Summary', 'Lorem ipsum dolor sit amet.', 1, 'John Doe');
 ``

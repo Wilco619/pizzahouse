@@ -7,20 +7,17 @@ from base.models import Blog,Flaticon,Item,Chef,Order, OrderItem
 def home(request):
     menu_items = Item.objects.all()
     blogs = Blog.objects.all()
-    flaticon = Flaticon.objects.all()
-    context = {"items":menu_items,"blogs":blogs,"flaticons":flaticon, }
+    context = {"items":menu_items,"blogs":blogs}
     return render(request, "index.html", context)
 
 def menu(request):
-    flaticon = Flaticon.objects.all()
     menu_items = Item.objects.all()
-    context = {"items":menu_items,"flaticons":flaticon}
+    context = {"items":menu_items}
     return render(request, "menu.html", context)
 
 def services(request):
-    flaticon = Flaticon.objects.all()
     menu_items = Item.objects.all()
-    context = {"flaticons":flaticon, "items":menu_items}
+    context = {"items":menu_items}
     return render(request, "services.html", context)
 
 def blog(request):
@@ -28,12 +25,21 @@ def blog(request):
 
 def about(request):
     chef = Chef.objects.all()
-    flaticon = Flaticon.objects.all()
-    context = {"chefs":chef, "flaticons":flaticon}
+    context = {"chefs":chef}
     return render(request, "about.html", context)
 
 def contact(request):
-    return render(request, "contact.html")
+    
+    queryset1= Chef()
+
+    queryset1.save()
+    data={
+        'queryset1':queryset1,
+    }
+    return render(request, "contact.html", data)
+
+def cart(request):
+    return render(request, "orderpage.html")
 
 
 #   path("", views.home, name ="home"),
@@ -52,14 +58,19 @@ def add_to_order(request, itemId):
     if not created:
         order_item.quantity += 1
         order_item.save()
+    context= {'item': item, 'order':order,'order_item':order_item}
     return redirect('order')
 
+#login form
 @login_required
 def order(request):
     order, created = Order.objects.get_or_create(user=request.user, is_ordered=False)
     order_items = order.orderitem_set.all()
     total = sum(item.Item.price * item.quantity for item in order_items)
-    return render(request, 'orderpage.html', {'order_items': order_items,'total':total})
+    if not created:
+        return redirect('order')
+    context={'order_items': order_items,'total':total}
+    return render(request, 'orderpage.html', context)
 
 # signup form
 def signup(request):

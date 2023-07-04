@@ -9,6 +9,7 @@ urlpatterns = [
     path("blog", views.blog, name ="blog"),
     path("about", views.about, name ="about"),
     path("contact", views.contact, name ="contact"),
+    path("cart", views.cart, name="cart"),
     #signup and order urls
     path("order", views.order, name ="order"),
     path("signup",views.signup,name="signup"),
