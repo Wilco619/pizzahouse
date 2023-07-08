@@ -3,24 +3,26 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.views import View
+from . forms import CustomerProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from base.models import Blog,Flaticon,Item,Chef,Order, OrderItem
+from base.models import Blog,Flaticon,Product,Chef,Customer
 
 def home(request):
-    menu_items = Item.objects.all()
+    menu_products = Product.objects.all()
     blogs = Blog.objects.all()
-    context = {"items":menu_items,"blogs":blogs}
+    context = {"products":menu_products,"blogs":blogs}
     return render(request, "index.html", context)
 
 def menu(request):
-    menu_items = Item.objects.all()
-    context = {"items":menu_items}
+    menu_products = Product.objects.all()
+    context = {"products":menu_products}
     return render(request, "menu.html", context)
 
 def services(request):
-    menu_items = Item.objects.all()
-    context = {"items":menu_items}
+    menu_products = Product.objects.all()
+    context = {"products":menu_products}
     return render(request, "services.html", context)
 
 def blog(request):
@@ -46,36 +48,38 @@ def contact(request):
 def cart(request):
     return render(request, "orderpage.html")
 
+class ProfileView(View):
+    def get(self,request):
+         form = CustomerProfileForm()
+         return render(request, "profilepage.html",locals())
+    def post(self,request):
+         form = CustomerProfileForm(request.POST)
+         if form.is_valid():
+             user = request.user
+             name = form.cleaned_data['name']
+             locality = form.cleaned_data['locality']
+             city = form.cleaned_data['city']
+             mobile = form.cleaned_data['mobile']
+             zipcode = form.cleaned_data['zipcode']
+             county = form.cleaned_data['county']
 
-#   path("", views.home, name ="home"),
-#     path("menu", views.menu, name ="menu")
-#     path("services", views.services, name ="services")
-#     path("blog", views.blog, name ="blog")
-#     path("about", views.about, name ="about")
-#     path("contact", views.contact, name ="contact")'
+             reg= Customer(user=user, name=name,locality=locality, city=city, mobile=mobile, zipcode=zipcode, county=county)
+             reg.save()
+             messages.success(request,"Congratulations! Profile Saved Successfully")
+         else:
+             messages.warning(request,"Invalid Data Input")
+         return render(request, "profilepage.html",locals())
 
-# views for login signup and orders
+def address(request):
+    add = 'address'
+    addss = Customer.objects.filter(user=request.user)
+    context = {'add':add,'addss':addss}
+    return render(request, "profilepage.html",context)
 
-def add_to_order(request, itemId):
-    item = Item.objects.get(pk=itemId)
-    order, created = Order.objects.get_or_create(user=request.user, is_ordered=False)
-    order_item, created = OrderItem.objects.get_or_create(order=order, item=item)
-    if not created:
-        order_item.quantity += 1
-        order_item.save()
-    context= {'item': item, 'order':order,'order_item':order_item}
-    return redirect('order')
 
-#login form
-@login_required
-def order(request):
-    order, created = Order.objects.get_or_create(user=request.user, is_ordered=False)
-    order_items = order.orderitem_set.all()
-    total = sum(item.Item.price * item.quantity for item in order_items)
-    if not created:
-        return redirect('order')
-    context={'order_items': order_items,'total':total}
-    return render(request, 'orderpage.html', context)
+
+
+
 
 # loginForm
 def loginForm(request):
@@ -87,22 +91,22 @@ def loginForm(request):
      
 
      if request.method == 'POST':
-         userName = request.POST.get('username')
+         username = request.POST.get('username')
          password = request.POST.get('password')
 
         #try and check if the user exists in the database
          try:
-             user = User.objects.get(username=userName)
+             user = User.objects.get(username=username)
          except:
              messages.error(request, 'User Does Not Exist')
 
         #while the user is found to exist, authenticate the user, make sure password and username match   
-         user = authenticate(request, username=userName, password=password)
+         user = authenticate(request, username=username, password=password)
 
         #while the fields are not empty and user is found then create a session for the user and redirect them to their homepage
          if user is not None:
              login(request, user)
-             return redirect('home')
+             return redirect('profile')
          else:
              messages.error(request, 'UserName Or Password Does Not Exist')
 

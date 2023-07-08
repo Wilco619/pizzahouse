@@ -20,15 +20,18 @@ CREATE TABLE blogs (
     blogId INT,
     author VARCHAR(255)
 );
-CREATE TABLE item (
+CREATE TABLE product (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    image VARCHAR(255),
-    name VARCHAR(255),
-    description TEXT,
+    title VARCHAR(255),
+    description VARCHAR(255),
+    composition TEXT DEFAULT '',
     price DECIMAL(10, 2),
-    itemId INT,
-    cat VARCHAR(255)
+    discounted_price DECIMAL(10, 2),
+    category VARCHAR(40),
+    on_offer TINYINT(1) DEFAULT 0,
+    image VARCHAR(255)
 );
+
 
 CREATE TABLE CHEF(
     Id INT PRIMARY KEY AUTO_INCREMENT,

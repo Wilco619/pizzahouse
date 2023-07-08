@@ -7,6 +7,8 @@ urlpatterns = [
     path("loginForm/",views.loginForm,name="loginForm"),
     path("registerForm/",views.registerForm,name="registerForm"),
     path("logoutForm/",views.logoutForm,name="logoutForm"),
+    path("profile/",views.ProfileView.as_view(),name="profile"),
+    path("address/",views.address,name="address"),
     path("", views.home, name ="home"),
     path("menu/", views.menu, name ="menu"),
     path("services/", views.services, name ="services"),
@@ -17,7 +19,4 @@ urlpatterns = [
     path("blog/", views.cart, name="blog"),
     path("blog1/", views.cart, name="blog1"),
     #signup and order urls
-    path("order", views.order, name ="order"),
-    
-    path("add_to_order/<int:itemId>", views.add_to_order, name="add_to_order"),
 ] 

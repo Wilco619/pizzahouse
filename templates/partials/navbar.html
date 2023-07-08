@@ -25,6 +25,7 @@
 
         {% if request.user.is_authenticated %}
         <li class="nav-item"><a href="{% url 'logoutForm' %}" class="nav-link">LogOut</a></li>
+        <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
         {% else %}
         <li class="nav-item"><a href="{% url 'loginForm' %}" class="nav-link">Login</a></li>
         {%endif%}
