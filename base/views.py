@@ -48,11 +48,15 @@ def contact(request):
 def cart(request):
     return render(request, "orderpage.html")
 
+
+#for both post and get methods in a function use a class
 class ProfileView(View):
     def get(self,request):
+         add = 'create'
          form = CustomerProfileForm()
          return render(request, "profilepage.html",locals())
     def post(self,request):
+         add = 'create'
          form = CustomerProfileForm(request.POST)
          if form.is_valid():
              user = request.user
@@ -68,7 +72,8 @@ class ProfileView(View):
              messages.success(request,"Congratulations! Profile Saved Successfully")
          else:
              messages.warning(request,"Invalid Data Input")
-         return render(request, "profilepage.html",locals())
+             context={'add':add}
+         return render(request, "profilepage.html",locals(context))
 
 def address(request):
     add = 'address'
@@ -76,11 +81,32 @@ def address(request):
     context = {'add':add,'addss':addss}
     return render(request, "profilepage.html",context)
 
+class updateAddress(View):
+    def  get(self,request,pk):
+        adds = Customer.objects.get(pk=pk)
+        form = CustomerProfileForm(instance=adds)
+        add = 'upup'
+        return render(request, 'profilepage.html',locals())
+    def post(self,request,pk):
+        form = CustomerProfileForm(request.POST)
+        if form.is_valid():
+             adds = Customer.objects.get(pk=pk)
+             adds.name = form.cleaned_data['name']
+             adds.locality = form.cleaned_data['locality']
+             adds.city = form.cleaned_data['city']
+             adds.mobile = form.cleaned_data['mobile']
+             adds.zipcode = form.cleaned_data['zipcode']
+             adds.county = form.cleaned_data['county']
+
+             adds.save()
+             messages.success(request,"Congratulations! Profile Updated Successfully")
+        else:
+             messages.warning(request,"Invalid Data Input")
+        return redirect('address')
 
 
 
-
-
+##########
 # loginForm
 def loginForm(request):
      

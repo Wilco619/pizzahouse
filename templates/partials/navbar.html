@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span>Pizza<br><small>Delicous</small></a>
+    <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span>Pizza<br><small>Delicious</small></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span> Menu
@@ -15,10 +15,6 @@
         <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
       </ul>
 
-      {% if request.user.is_authenticated %}
-    <p>Hello {{request.user}}</p>
-    {%endif%}
-
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active"><a href="{% url 'cart' %}" class="nav-link">cart</a></li>
@@ -26,21 +22,13 @@
         {% if request.user.is_authenticated %}
         <li class="nav-item"><a href="{% url 'logoutForm' %}" class="nav-link">LogOut</a></li>
         <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="{% url 'passwordchange' %}" class="nav-link">Change Password</a></li>
+        <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Hello {{request.user | capfirst}}</a></li>
         {% else %}
         <li class="nav-item"><a href="{% url 'loginForm' %}" class="nav-link">Login</a></li>
         {%endif%}
       </ul>
     </div>
-
-    
-
-      {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-        <li {%if message.tags%} class="{{ message.tags }}" {% endif%}>{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
 
     </div>
   </div>
