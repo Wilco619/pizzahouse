@@ -1,6 +1,6 @@
 from django.urls import path 
-from . import views
-from .forms import MyPasswordChangeForm, MyPasswordResetForm
+from . import views, forms
+from .forms import MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm
 from django.contrib.auth import views as auth_view
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,11 +22,19 @@ urlpatterns = [
     path("blog1/", views.cart, name="blog1"),
 
     #user authentication
-    path("loginForm/",views.loginForm,name="loginForm"),
-    path("registerForm/",views.registerForm,name="registerForm"),
-    path("logoutForm/",views.logoutForm,name="logoutForm"),
-    path("passwordchange/",auth_view.PasswordChangeView.as_view(template_name='passwordwork.html',form_class=MyPasswordChangeForm, success_url='/passwordchangedone'), name='passwordchange'),
+    path("loginForm/",forms.loginForm,name="loginForm"),
+    path("registerForm/",forms.registerForm,name="registerForm"),
+    path("logoutForm/",forms.logoutForm,name="logoutForm"),
+    #password change 
+    path("passwordchange/",auth_view.PasswordChangeView.as_view(template_name='pwdchange.html',form_class=MyPasswordChangeForm, success_url='/passwordchangedone'), name='passwordchange'),
     path("passwordchangedone/",auth_view.PasswordChangeDoneView.as_view(template_name='pwdchangedone.html'), name='passwordchangedone'),
-    path("passwordreset/",auth_view.PasswordResetView.as_view(template_name='passwordwork.html',form_class=MyPasswordResetForm), name='/passwordresetdone'),
+    #password reset
+    path("passwordreset/",auth_view.PasswordResetView.as_view(template_name='pwdreset.html',form_class=MyPasswordResetForm), name='passwordreset'),
+    path("passwordreset/done/",auth_view.PasswordResetDoneView.as_view(template_name='pwdresetdone.html'), name='password_reset_done'),
+    path("passwordresetconfirm/<uidb64>/<token>/",auth_view.PasswordResetConfirmView.as_view(template_name='pwdresetConfirm.html',form_class=MySetPasswordForm), name='password_reset_confirm'),
+    path("passwordresetcomplete/",auth_view.PasswordResetCompleteView.as_view(template_name='pwdresetcomplete.html'), name='password_reset_complete'),
+    
+    
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

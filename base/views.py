@@ -4,9 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views import View
-from . forms import CustomerProfileForm
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from . forms import CustomerProfileForm
 from base.models import Blog,Flaticon,Product,Chef,Customer
 
 def home(request):
@@ -73,7 +72,7 @@ class ProfileView(View):
          else:
              messages.warning(request,"Invalid Data Input")
              context={'add':add}
-         return render(request, "profilepage.html",locals(context))
+         return render(request, "profilepage.html",locals())
 
 def address(request):
     add = 'address'
@@ -103,61 +102,3 @@ class updateAddress(View):
         else:
              messages.warning(request,"Invalid Data Input")
         return redirect('address')
-
-
-
-##########
-# loginForm
-def loginForm(request):
-     
-     page = 'login'
-     #when the user is already logged in they cant access login page via the url
-     if request.user.is_authenticated:
-         return redirect('home')
-     
-
-     if request.method == 'POST':
-         username = request.POST.get('username')
-         password = request.POST.get('password')
-
-        #try and check if the user exists in the database
-         try:
-             user = User.objects.get(username=username)
-         except:
-             messages.error(request, 'User Does Not Exist')
-
-        #while the user is found to exist, authenticate the user, make sure password and username match   
-         user = authenticate(request, username=username, password=password)
-
-        #while the fields are not empty and user is found then create a session for the user and redirect them to their homepage
-         if user is not None:
-             login(request, user)
-             return redirect('profile')
-         else:
-             messages.error(request, 'UserName Or Password Does Not Exist')
-
-     context = {'page': page}
-     return render(request, 'RegisterLoginForm.html', context) 
-
-#cancel session from database and redirect to homepage
-def logoutForm(request):
-    logout(request)
-    return redirect('home')
-
-#signUp/register form
-def registerForm(request):
-    form = UserCreationForm()
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'Sorry An Error Occurred During Registration')
-
-    context = {'form': form}
-    return render(request, 'RegisterLoginForm.html',context)
